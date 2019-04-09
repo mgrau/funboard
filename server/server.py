@@ -1,9 +1,11 @@
 import flask
+from flask_cors import CORS
 from os import listdir
 from os.path import join
 import subprocess
 
-app = flask.Flask(__name__)
+app = flask.Flask(__name__, static_url_path="", static_folder='../static/dist')
+CORS(app)
 PATH = './samples'
 
 def samples():
@@ -11,7 +13,7 @@ def samples():
 
 @app.route('/')
 def index():
-    return ''
+    return flask.send_from_directory('../static/dist', 'index.html')
 
 @app.route('/samples')
 def get_samples():
