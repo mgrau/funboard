@@ -1,0 +1,27 @@
+{
+  "name": "funboard",
+  "version": "1.0.0",
+  "description": "frontend to play mp3 samples",
+  "main": "index.jsx",
+  "scripts": {
+    "start": "parcel run index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mgrau/funboard.git"
+  },
+  "author": "Matt Grau",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mgrau/funboard/issues"
+  },
+  "homepage": "https://github.com/mgrau/funboard#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "build-url": "^1.3.2",
+    "parcel-bundler": "^1.12.3",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  }
+}
