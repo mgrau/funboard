@@ -9,7 +9,9 @@ CORS(app)
 PATH = './samples'
 
 def samples():
-    return [filename[:-4] for filename in listdir(PATH) if filename.endswith('.mp3')]
+    lst = [filename[:-4] for filename in listdir(PATH) if filename.endswith('.mp3')]
+    lst.sort()
+    return lst
 
 @app.route('/')
 def index():
@@ -22,7 +24,7 @@ def get_samples():
 @app.route('/play/<name>')
 def play_sample(name):
     if name in samples():
-        subprocess.Popen(['mpg321', '-q', join(PATH, name + '.mp3')])
+        subprocess.Popen(['mpg321', '-qg 800', join(PATH, name + '.mp3')])
         return '', 200
     else:
         return '', 404
