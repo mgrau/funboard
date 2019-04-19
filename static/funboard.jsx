@@ -2,38 +2,78 @@ import React from "react";
 import axios from "axios";
 import buildUrl from "build-url";
 
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+
 import "./funboard.css";
 
 export default class Funboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      samples: []
+      samples: [],
+      tabIndex: -1
     };
   }
   componentDidMount() {
-    axios
-      .get(buildUrl(this.props.api, { path: "samples" }))
-      .then(result => this.setState({ samples: result.data }));
+    axios.get(buildUrl(this.props.api, { path: "samples" })).then(result => {
+      this.setState({ samples: result.data, tabIndex: 0 });
+    });
   }
 
   render() {
-    const samples = this.state.samples.map((sample, index) => (
-      <Sample key={index} sample={sample} api={this.props.api} />
+    const tabList = Object.keys(this.state.samples).map((sample, index) => (
+      <Tab key={index} selectedClassName={"active"}>
+        {sample.replace(/^.+\//, "")}
+      </Tab>
     ));
-    return <div id="funboard">{samples}</div>;
+    const panels = Object.keys(this.state.samples).map((sample, index) => (
+      <TabPanel key={index}>
+        <Panel
+          name={sample}
+          samples={this.state.samples[sample]}
+          api={this.props.api}
+        />
+      </TabPanel>
+    ));
+
+    return (
+      <div id="funboard">
+        <Tabs
+          selectedIndex={this.state.tabIndex}
+          onSelect={tabIndex => this.setState({ tabIndex })}
+          selectedClassName={"active"}
+        >
+          <TabList className="tabList">{tabList}</TabList>
+          {panels}
+        </Tabs>
+      </div>
+    );
   }
 }
 
+function Panel(props) {
+  const samples = props.samples.map((sample, index) => (
+    <Sample key={index} sample={sample} api={props.api} />
+  ));
+  return <div className="panel">{samples}</div>;
+}
+
 function Sample(props) {
+  var name = props.sample;
+  // strip file extension
+  name = name.replace(/\.[^/.]+$/, "");
+  // strip folder name
+  name = name.replace(/^.+\//, "");
   return (
     <div
       className="sample"
       onClick={() =>
-        axios.get(buildUrl(props.api, { path: "play/" + props.sample }))
+        axios.get(buildUrl(props.api, { path: "play" }), {
+          params: { sample: props.sample }
+        })
       }
     >
-      {props.sample}
+      {name}
     </div>
   );
 }
