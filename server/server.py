@@ -7,7 +7,7 @@ PATH = './samples'
 
 
 def samples():
-    return {root: [os.path.join(root, file) for file in files] for root, _, files in os.walk(PATH)}
+    return {root: [os.path.join(root, file) for file in files if file[0] != '.'] for root, _, files in os.walk(PATH)}
 
 
 @app.route('/')
