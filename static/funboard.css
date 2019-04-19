@@ -11,6 +11,7 @@
   padding: 0;
   margin: 0;
   display: flex;
+  flex-wrap: wrap;
 }
 
 #funboard .tabList li {
@@ -67,4 +68,12 @@
   transition: 150ms ease;
   box-shadow: none;
   top: 2px;
+}
+
+#stop {
+  background: linear-gradient(#991b3a, #490e1b);
+  color: white;
+  border-radius: 10px 10px 10px 10px !important;
+  margin-bottom: 3px;
+  margin-left: 10px;
 }

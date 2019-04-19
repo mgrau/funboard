@@ -14,10 +14,16 @@ export default class Funboard extends React.Component {
       tabIndex: -1
     };
   }
+
   componentDidMount() {
     axios.get(buildUrl(this.props.api, { path: "samples" })).then(result => {
       this.setState({ samples: result.data, tabIndex: 0 });
     });
+  }
+
+  stop() {
+    axios.get(buildUrl(this.props.api, { path: "stop" }));
+    console.log("stop");
   }
 
   render() {
@@ -41,9 +47,13 @@ export default class Funboard extends React.Component {
         <Tabs
           selectedIndex={this.state.tabIndex}
           onSelect={tabIndex => this.setState({ tabIndex })}
-          selectedClassName={"active"}
         >
-          <TabList className="tabList">{tabList}</TabList>
+          <TabList className="tabList">
+            {tabList}
+            <li id="stop" onClick={() => this.stop()}>
+              Stop
+            </li>
+          </TabList>
           {panels}
         </Tabs>
       </div>
