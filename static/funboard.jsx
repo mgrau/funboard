@@ -23,7 +23,6 @@ export default class Funboard extends React.Component {
 
   stop() {
     axios.get(buildUrl(this.props.api, { path: "stop" }));
-    console.log("stop");
   }
 
   render() {
@@ -50,12 +49,42 @@ export default class Funboard extends React.Component {
         >
           <TabList className="tabList">
             {tabList}
-            <li id="stop" onClick={() => this.stop()}>
-              Stop
-            </li>
+            <Tab selectedClassName={"active"}>speak</Tab>
           </TabList>
           {panels}
+          <TabPanel>
+            <Speak api={this.props.api} />
+          </TabPanel>
         </Tabs>
+        <div id="stop" className="button" onClick={() => this.stop()}>
+          Stop
+        </div>
+      </div>
+    );
+  }
+}
+
+class Speak extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { text: "" };
+  }
+
+  speak(text) {
+    console.log(this.props.api);
+    axios.get(buildUrl(this.props.api, { path: "speak" }), {
+      params: { text: text }
+    });
+  }
+  render() {
+    return (
+      <div id="speak" className="panel">
+        <input
+          onChange={event => this.setState({ text: event.target.value })}
+        />
+        <div onClick={() => this.speak(this.state.text)} className="button">
+          Speak
+        </div>
       </div>
     );
   }
@@ -76,14 +105,14 @@ function Sample(props) {
   name = name.replace(/^.+\//, "");
   return (
     <div
-      className="sample"
+      className="sample button"
       onClick={() =>
         axios.get(buildUrl(props.api, { path: "play" }), {
           params: { sample: props.sample }
         })
       }
     >
-      {name}
+      <span>{name}</span>
     </div>
   );
 }

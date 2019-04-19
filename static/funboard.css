@@ -18,7 +18,7 @@
   list-style: none;
   border: 1px solid red;
   border-radius: 10px 10px 0 0;
-  padding: 20px;
+  padding: 10px;
   border: 1px solid rgb(197, 197, 197);
   margin-right: 5px;
   border-bottom: 0px;
@@ -43,37 +43,70 @@
 }
 
 #funboard .sample {
+  margin: 10px;
   width: 200px;
   height: 75px;
-  margin: 10px;
   border: 5px solid rgb(122, 122, 122);
   background: linear-gradient(#1b5699, #0e1449);
+}
+
+#funboard .sample span {
+  padding: 10px;
+}
+
+#speak {
+  display: flex;
+  align-items: center;
+}
+
+#speak > input {
+  border: 1px solid #0e3649;
+  border-radius: 10px;
+  height: 40px;
+  font-size: 1em;
+  text-align: center;
+  margin: 10px;
+}
+
+#speak > input:focus {
+  outline: none;
+}
+
+#speak > div {
+  width: 150px;
+  height: 25px;
+  padding: 10px;
+  background: linear-gradient(#1b9999, #0e3649);
+  color: white;
+  margin: 10px;
+}
+
+#stop {
+  width: 200px;
+  height: 50px;
+  background: linear-gradient(#991b3a, #490e1b);
+  color: white;
+  margin-top: 10px;
+}
+
+#funboard .button {
   color: white;
   border-radius: 10px;
   display: grid;
   justify-items: center;
   align-items: center;
-
   position: relative;
   top: 0;
-  opacity: 0.9;
+  opacity: 0.95;
   box-shadow: 3px 3px 10px 2px rgb(101, 128, 138);
 }
 
-#funboard .sample:hover {
+#funboard .button:hover {
   opacity: 1;
 }
 
-#funboard .sample:active {
-  transition: 150ms ease;
+#funboard .button:active {
+  transition: 100ms ease;
   box-shadow: none;
   top: 2px;
-}
-
-#stop {
-  background: linear-gradient(#991b3a, #490e1b);
-  color: white;
-  border-radius: 10px 10px 10px 10px !important;
-  margin-bottom: 3px;
-  margin-left: 10px;
 }
