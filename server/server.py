@@ -1,31 +1,36 @@
 import flask
-from flask_cors import CORS
-from os import listdir
-from os.path import join
+import os
 import subprocess
 
 app = flask.Flask(__name__, static_url_path="", static_folder='../static/dist')
-CORS(app)
 PATH = './samples'
 
+
 def samples():
-    return sorted([filename[:-4] for filename in listdir(PATH) if filename.endswith('.mp3')])
+    return {root: [os.path.join(root, file) for file in files] for root, _, files in os.walk(PATH)}
+
 
 @app.route('/')
 def index():
     return flask.send_from_directory('../static/dist', 'index.html')
 
+
 @app.route('/samples')
 def get_samples():
     return flask.jsonify(samples())
 
-@app.route('/play/<name>')
-def play_sample(name):
-    if name in samples():
-        subprocess.Popen(['mpg321', '-qg 100', join(PATH, name + '.mp3')])
+
+@app.route('/play', methods=['GET'])
+def play_sample():
+    sample = flask.request.args.get('sample')
+    if sample in [sample for samples in samples().values()
+                  for sample in samples]:
+        subprocess.Popen(
+            ['mpg321', '-qg 100', os.path.join(sample)])
         return '', 200
     else:
         return '', 404
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=False)
