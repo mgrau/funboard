@@ -4,5 +4,5 @@ node_modules/
 dist/
 settings.json
 .DS_Store
-
+__pycache__/
 samples/

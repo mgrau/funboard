@@ -5,6 +5,7 @@
   "main": "index.jsx",
   "scripts": {
     "start": "parcel run index.html",
+    "build": "parcel build index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,5 +25,8 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-tabs": "^3.0.0"
+  },
+  "devDependencies": {
+    "cssnano": "^4.1.10"
   }
 }
