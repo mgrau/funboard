@@ -3,7 +3,7 @@ Description=funboard soundboard
 After=network.target
 
 [Service]
-ExecStart=/home/tiqi/funboard/venv/bin/python /home/tiqi/funboard/server/server.py
+ExecStart=/home/tiqi/funboard/venv/bin/gunicorn -b 0.0.0.0:80 server.server:app
 WorkingDirectory=/home/tiqi/funboard/
 Restart=always
 TimeoutStopSec=30
