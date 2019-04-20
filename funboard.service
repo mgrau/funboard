@@ -1,0 +1,12 @@
+[Unit]
+Description=funboard soundboard
+After=network.target
+
+[Service]
+ExecStart=/home/tiqi/funboard/venv/bin/gunicorn -b 0.0.0.0:80 server.server:app
+WorkingDirectory=/home/tiqi/funboard/
+Restart=always
+TimeoutStopSec=30
+
+[Install]
+WantedBy=multi-user.target
