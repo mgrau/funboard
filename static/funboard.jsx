@@ -43,6 +43,9 @@ export default class Funboard extends React.Component {
 
     return (
       <div id="funboard">
+        <div id="stop" className="button" onClick={() => this.stop()}>
+          Stop
+        </div>
         <Tabs
           selectedIndex={this.state.tabIndex}
           onSelect={tabIndex => this.setState({ tabIndex })}
@@ -56,9 +59,6 @@ export default class Funboard extends React.Component {
             <Speak api={this.props.api} />
           </TabPanel>
         </Tabs>
-        <div id="stop" className="button" onClick={() => this.stop()}>
-          Stop
-        </div>
       </div>
     );
   }
