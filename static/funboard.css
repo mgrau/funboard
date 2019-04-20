@@ -72,6 +72,7 @@
   font-size: 1em;
   text-align: center;
   margin: 10px;
+  width: 75%;
 }
 
 #speak > input:focus {
@@ -79,7 +80,7 @@
 }
 
 #speak > div {
-  width: 150px;
+  width: 200px;
   height: 25px;
   padding: 10px;
   background: linear-gradient(#1b9999, #0e3649);

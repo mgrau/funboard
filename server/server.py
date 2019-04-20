@@ -21,10 +21,6 @@ def index():
     return flask.send_from_directory('../static/dist', 'index.html')
 
 
-print(ENDPOINT)
-print(os.path.join(ENDPOINT, 'samples'))
-
-
 @app.route(os.path.join(ENDPOINT, 'samples'))
 def get_samples():
     return flask.jsonify(samples())
